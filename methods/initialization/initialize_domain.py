@@ -1,7 +1,20 @@
+# methods/initialization/initialize_domain.py
 import numpy as np
 
+def create_domain(domain):
+    """
+    Initialize computational domain and mesh.
 
-def initialize_domain(domain):
+    Parameters
+    ----------
+    domain : dict
+        Must contain 'nx', 'ny', 'lx', 'ly'
+
+    Returns
+    -------
+    dict
+        Contains 'nx', 'ny', 'lx', 'ly', 'dx', 'dy', 'x', 'y'
+    """
     nx = domain["nx"]
     ny = domain["ny"]
     lx = domain["lx"]
@@ -13,12 +26,13 @@ def initialize_domain(domain):
     x = np.linspace(0.0, lx, nx)
     y = np.linspace(0.0, ly, ny)
 
-    return x, y, dx, dy
-
-
-def initialize_fields(nx, ny):
-    u = np.zeros((ny, nx))
-    v = np.zeros((ny, nx))
-    p = np.zeros((ny, nx))
-
-    return u, v, p
+    return {
+        "nx": nx,
+        "ny": ny,
+        "lx": lx,
+        "ly": ly,
+        "dx": dx,
+        "dy": dy,
+        "x": x,
+        "y": y
+    }
