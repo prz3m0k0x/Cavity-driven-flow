@@ -6,9 +6,12 @@ Currently it supports central and backward difference scheme for calcualting gra
 To use the solver open the \config and:
 1. Setup your boundary conditions.
   Currently two types of BC are involved - stationary and moving wall.
-2. Setup fluid properties, for now just viscosity and density
-3. Setup domain setting - nubmer of grid points in x and y direction, lenght of the domain bounds, Courant number and number of timesteps
-4. Save files and run the run.py file in the main directory.
+  To setup moving wall in the dictionary contained in boundary_conditions.py file enter "moving_wall" for keyword "type". Then, for keyword "velocity" enter list containing elements of velocity vector of the wall.
+  For stationary wall simply write "type" : "stationary_wall".
+  Note that four walls have to be specified with corresponding keywords "left", "right", "top" and "bottom".
+3. Setup fluid properties, for now just viscosity and density
+4. Setup domain setting - nubmer of grid points in x and y direction, lenght of the domain bounds, Courant number and number of timesteps
+5. Save files and run the run.py file in the main directory.
 
 If there are troubles with convergence i suggest manipulating Courants number, timesteps and sizing of the grid.
 You can use premade graphics module that provide velocity magnitude and pressure contours. Also animations are available to use.
