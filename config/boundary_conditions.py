@@ -6,19 +6,19 @@ the BC file should be equal to the number of boundary zones.
 """
 BC = {
     "top" : {
-        'type' : 'moving wall',
-        'velocity' : (1, 0)
+        'type' : 'moving_wall',
+        'velocity' : (1, 0),
     },
 
     'left' : {
-        'type' : 'stationary wall'
+        'type' : 'stationary_wall'
     },
 
     'right' : {
-        'type' : 'stationary wall'
+        'type' : 'stationary_wall'
     },
 
     'bottom' : {
-        'type' : 'stationary wall'
+        'type' : 'stationary_wall'
     },
 }
