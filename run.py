@@ -3,7 +3,6 @@
 Main script to run the lid-driven cavity solver
 using configs from the config directory.
 """
-import matplotlib.pyplot as plt
 
 from config.domain import domain
 from config.boundary_conditions import BC
@@ -54,9 +53,9 @@ p = results["p"]
 x, y = results["x"], results["y"]
 t = t_final
 
-#plot_fields(x, y, u, v, p, t)
-#plot_velocity_vectors(x, y, u, v)
-#plot_streamlines(x, y, u, v)
+plot_fields(x, y, u, v, p, t)
+plot_velocity_vectors(x, y, u, v)
+plot_streamlines(x, y, u, v)
 
 animate_contours(
     results["x"],

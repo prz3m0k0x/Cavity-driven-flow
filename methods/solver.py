@@ -8,14 +8,13 @@ import numpy as np
 from methods.initialization.initialize_domain import create_domain
 from methods.initialization.initialize_fields import create_fields, apply_velocity_bc
 from methods.discretization.momentum import compute_tentative_velocity
-from methods.discretization.poisson_pressure import solve_pressure_poisson
-from graphics.plots import plot_fields
+from methods.discretization.poisson_pressure import solve_pressure_Gauss_Seidel, solve_pressure_Jacobi
 
 def solve_cavity(domain, fluid, bc, dt, t_final,
                  scheme_first="backward", scheme_second="central",
-                 tol=1e-4, max_iter=500, save_interval=None):
+                 tol=1e-6, max_iter=2000, save_interval=None):
     """
-    Solve 2D lid-driven cavity flow using projection method.
+    Solve 2D lid-driven cavity flow.
 
     Parameters
     ----------
@@ -85,7 +84,7 @@ def solve_cavity(domain, fluid, bc, dt, t_final,
         )
 
         #Solve pressure Poisson
-        p = solve_pressure_poisson(p, rhs, dx, dy, tol=tol, max_iter=max_iter)
+        p = solve_pressure_Jacobi(p, rhs, dx, dy, tol=tol, max_iter=max_iter)
 
         #Update velocity using pressure gradient
         u[1:-1, 1:-1] = u_star[1:-1, 1:-1] - (dt/rho) * (p[1:-1, 2:] - p[1:-1, :-2]) / (2*dx)

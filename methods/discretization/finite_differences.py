@@ -8,7 +8,7 @@ import numpy as np
 
 def central_difference_x(f, dx):
     """
-    Compute ∂f/∂x using central differences for interior points.
+    Compute del f/ del x using central differences for interior points.
 
     Parameters
     ----------
@@ -28,7 +28,7 @@ def central_difference_x(f, dx):
 
 def central_difference_y(f, dy):
     """
-    Compute ∂f/∂y using central differences for interior points.
+    Compute del f/del y using central differences for interior points.
     """
     df_dy = np.zeros_like(f)
     df_dy[1:-1, :] = (f[2:, :] - f[:-2, :]) / (2*dy)
@@ -36,7 +36,7 @@ def central_difference_y(f, dy):
 
 def backward_difference_x(f, dx):
     """
-    Compute ∂f/∂x using backward differences.
+    Compute del f/del x using backward differences.
     """
     df_dx = np.zeros_like(f)
     df_dx[:, 1:] = (f[:, 1:] - f[:, :-1]) / dx
@@ -44,7 +44,7 @@ def backward_difference_x(f, dx):
 
 def backward_difference_y(f, dy):
     """
-    Compute ∂f/∂y using backward differences.
+    Compute del f/del y using backward differences.
     """
     df_dy = np.zeros_like(f)
     df_dy[1:, :] = (f[1:, :] - f[:-1, :]) / dy
