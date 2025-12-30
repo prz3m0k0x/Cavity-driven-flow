@@ -12,4 +12,7 @@ To use the solver open the \config and:
 
 If there are troubles with convergence i suggest manipulating Courants number, timesteps and sizing of the grid.
 You can use premade graphics module that provide velocity magnitude and pressure contours. Also animations are available to use.
-To setup animation you must enter number of saves in the run.py file calling function solve(). Details are included in docstring.
+To setup animation you must enter number of saves in the run.py file calling function solver(). Details are included in docstring.
+
+
+Further works would definietely include adding more stable schemes for gradients, as stability of solutions i currently the main issue.
