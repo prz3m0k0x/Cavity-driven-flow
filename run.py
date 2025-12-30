@@ -43,12 +43,16 @@ results = solve_cavity(
 
 #Plot final u-velocity
 u = results["u"]
+v = results["v"]
+velocity = (u ** 2 + v ** 2)** 1/2
+p = results["p"]
 x, y = results["x"], results["y"]
 
 plt.figure(figsize=(6,5))
-plt.contourf(x, y, u, levels=50, cmap="jet")
-plt.colorbar(label="u-velocity")
+plt.contourf(x, y, p, levels=50, cmap="jet")
+plt.colorbar(label="pressure")
+plt.streamplot(x, y, u, v)
 plt.xlabel("x")
 plt.ylabel("y")
-plt.title("u-velocity at final time")
+plt.title("velocity and pressure at final time")
 plt.show()
