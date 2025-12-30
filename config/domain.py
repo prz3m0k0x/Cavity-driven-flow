@@ -12,10 +12,10 @@ where |U_boundary| is the velocity magnitude at the boundary
 """
 
 domain = {
-    "nx": ,
-    "ny": ,
-    "lx": ,
-    "ly": ,
-    "courant": ,
-    "nt": 
+    "nx": 41,
+    "ny": 41,
+    "lx": 0.1,
+    "ly": 0.1,
+    "courant": 0.05,
+    "nt": 200
 }

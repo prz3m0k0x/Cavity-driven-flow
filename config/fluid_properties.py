@@ -5,6 +5,6 @@ of fluid simulated.
 """
 
 fluid = {
-    "rho": ,
-    "nu":
+    "rho": 1.0,
+    "nu": 0.001
 }

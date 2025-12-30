@@ -3,13 +3,19 @@
 Main script to run the lid-driven cavity solver
 using configs from the config directory.
 """
+import matplotlib.pyplot as plt
 
 from config.domain import domain
 from config.boundary_conditions import BC
 from config.fluid_properties import fluid
-
 from methods.solver import solve_cavity
-import matplotlib.pyplot as plt
+from graphics.plots import plot_fields, plot_velocity_vectors, plot_streamlines
+from graphics.animations import (
+    animate_contours,
+    animate_vectors
+)
+
+
 
 nx = domain["nx"]
 ny = domain["ny"]
@@ -38,21 +44,33 @@ results = solve_cavity(
     t_final=t_final,
     scheme_first="backward",   # advection
     scheme_second="central",   # diffusion
-    save_interval=50
+    save_interval=1
 )
 
 #Plot final u-velocity
 u = results["u"]
 v = results["v"]
-velocity = (u ** 2 + v ** 2)** 1/2
 p = results["p"]
 x, y = results["x"], results["y"]
+t = t_final
 
-plt.figure(figsize=(6,5))
-plt.contourf(x, y, p, levels=50, cmap="jet")
-plt.colorbar(label="pressure")
-plt.streamplot(x, y, u, v)
-plt.xlabel("x")
-plt.ylabel("y")
-plt.title("velocity and pressure at final time")
-plt.show()
+#plot_fields(x, y, u, v, p, t)
+#plot_velocity_vectors(x, y, u, v)
+#plot_streamlines(x, y, u, v)
+
+animate_contours(
+    results["x"],
+    results["y"],
+    results["u_hist"],
+    results["v_hist"],
+    results["p_hist"]
+)
+
+animate_vectors(
+    results["x"],
+    results["y"],
+    results["u_hist"],
+    results["v_hist"],
+    stride=4,
+    save=False
+)

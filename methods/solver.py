@@ -9,7 +9,7 @@ from methods.initialization.initialize_domain import create_domain
 from methods.initialization.initialize_fields import create_fields, apply_velocity_bc
 from methods.discretization.momentum import compute_tentative_velocity
 from methods.discretization.poisson_pressure import solve_pressure_poisson
-
+from graphics.plots import plot_fields
 
 def solve_cavity(domain, fluid, bc, dt, t_final,
                  scheme_first="backward", scheme_second="central",
@@ -51,6 +51,9 @@ def solve_cavity(domain, fluid, bc, dt, t_final,
     nx, ny = domain_data["nx"], domain_data["ny"]
     dx, dy = domain_data["dx"], domain_data["dy"]
     x, y = domain_data["x"], domain_data["y"]
+    u_hist = []
+    v_hist = []
+    p_hist = []
 
     #Initialize velocity and pressure fields
     u, v, p = create_fields(nx, ny)
@@ -91,6 +94,11 @@ def solve_cavity(domain, fluid, bc, dt, t_final,
         #Apply velocity boundary conditions
         u, v = apply_velocity_bc(u, v, bc)
 
+        if step % save_interval == 0:
+            u_hist.append(u.copy())
+            v_hist.append(v.copy())
+            p_hist.append(p.copy())
+
         #Optionally save snapshots
         if save_interval and step % save_interval == 0:
             snapshots.append({
@@ -107,6 +115,9 @@ def solve_cavity(domain, fluid, bc, dt, t_final,
         "p": p,
         "x": x,
         "y": y,
+        "u_hist" : u_hist,
+        "v_hist" : v_hist,
+        "p_hist" : p_hist,
         "snapshots": snapshots
     }
     return results
